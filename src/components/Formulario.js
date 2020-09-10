@@ -7,6 +7,7 @@ const Formulario = () => {
     nombre: "",
     categoria: "",
   });
+  const [error, setError] = useState(false);
 
   const { categorias } = useContext(CategoriasContext);
   const { buscarRecetas, setConsultar } = useContext(RecetasContext);
@@ -17,6 +18,11 @@ const Formulario = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!busqueda.categoria) {
+      setError(true);
+      return;
+    }
+    setError(false);
     buscarRecetas(busqueda);
     setConsultar(true);
   };
@@ -27,16 +33,16 @@ const Formulario = () => {
         <legend>Busca bebidas por Categoria o Ingrediente</legend>
       </fieldset>
       <div className="row mt-4">
-        <div className="col-md-4">
-          <input
+        <div className="col-md-1">
+          {/* <input
             name="nombre"
             className="form-control"
             type="text"
             placeholder="Bucar por ingrediente"
             onChange={obtenerDatosReceta}
-          />
+          /> */}
         </div>
-        <div className="col-md-4">
+        <div className="col-md-5">
           <select
             name="categoria"
             className="form-control"
@@ -50,13 +56,19 @@ const Formulario = () => {
             ))}
           </select>
         </div>
-        <div className="col-md-4">
+        <div className="col-md-5">
           <input
             type="submit"
             className="btn btn-block btn-primary"
             value="Buscar Bebidas"
           />
         </div>
+        <div className="col-md-1"></div>
+        {error ? (
+          <div class="alert alert-primary w-100  mr-5 ml-5 mt-3" role="alert">
+            Debe seleccionar una cartegoria
+          </div>
+        ) : null}
       </div>
     </form>
   );
