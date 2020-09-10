@@ -19,7 +19,7 @@ function getModalStyle() {
 const useStyles = makeStyles((theme) => ({
   paper: {
     position: "absolute",
-    width: 400,
+    width: 800,
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
@@ -86,35 +86,22 @@ const Receta = ({ receta }) => {
           >
             <div style={modalStyle} className={classes.paper}>
               <h2>{informacion.strDrink}</h2>
-              <div className="row">
-                <div className="col-md-6 mb-1">
+              <div className="row justify-content-around">
+                <div className="col-md-5 off mb-1">
                   <h3>Instrucciones</h3>
                   <p>{informacion.strInstructions}</p>
+                </div>
+
+                <div className="col-md-5 mb-1">
+                  <h3>Ingredientes y cantidades</h3>
+                  <ul>{mostarIngredientes(informacion)}</ul>
                   <img
                     src={informacion.strDrinkThumb}
                     alt={`Imagen de ${informacion.strDrink}`}
                     className="img-fluid my-4"
                   />
                 </div>
-
-                <div className="col-md-6 mb-1">
-                  <h3>Ingredientes y cantidades</h3>
-                  <ul>{mostarIngredientes(informacion)}</ul>
-                </div>
               </div>
-              {/* <div style={modalStyle} className={classes.paper}>
-              <div className="col-md-4 mb-3">
-                <h2>{informacion.strDrink}</h2>
-                <h3 className="mt-4">Instrucciones</h3>
-                <p>{informacion.strInstructions}</p>
-                <img
-                  src={informacion.strDrinkThumb}
-                  alt={`Imagen de ${informacion.strDrink}`}
-                  className="img-fluid my-4"
-                />
-                <h3>Ingredientes y cantidades</h3>
-                <ul>{mostarIngredientes(informacion)}</ul>
-              </div> */}
             </div>
           </Modal>
         </div>
