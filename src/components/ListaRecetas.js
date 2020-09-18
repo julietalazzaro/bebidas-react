@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import Receta from "./Receta.js";
+import PropTypes from "prop-types";
 import { RecetasContext } from "../context/RecetasContext.js";
 
 const ListaRecetas = () => {
@@ -15,4 +16,7 @@ const ListaRecetas = () => {
   );
 };
 
+ListaRecetas.propTypes = {
+  recetas: PropTypes.string,
+};
 export default ListaRecetas;

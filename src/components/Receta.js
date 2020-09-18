@@ -19,7 +19,7 @@ function getModalStyle() {
 const useStyles = makeStyles((theme) => ({
   paper: {
     position: "absolute",
-    width: 800,
+    width: "60vw",
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
@@ -55,6 +55,8 @@ const Receta = ({ receta }) => {
     }
     return ingredientes;
   };
+
+  if (receta.strDrink === "") return null;
   return (
     <div className="col-md-4 mb-3">
       <div className="card">
@@ -85,16 +87,23 @@ const Receta = ({ receta }) => {
             }}
           >
             <div style={modalStyle} className={classes.paper}>
-              <h2>{informacion.strDrink}</h2>
+              <h2>
+                <strong>{informacion.strDrink}</strong>
+              </h2>
               <div className="row justify-content-around">
-                <div className="col-md-5 off mb-1">
+                <div className="col-md-6 off mb-1">
                   <h3>Instrucciones</h3>
                   <p>{informacion.strInstructions}</p>
-                </div>
-
-                <div className="col-md-5 mb-1">
                   <h3>Ingredientes y cantidades</h3>
                   <ul>{mostarIngredientes(informacion)}</ul>
+                  <p>
+                    Tipo de Vaso: <strong>{informacion.strGlass}</strong>
+                  </p>
+                  <p>
+                    Categoria: <strong>{informacion.strCategory}</strong>
+                  </p>
+                </div>
+                <div className="col-md-5 mb-1">
                   <img
                     src={informacion.strDrinkThumb}
                     alt={`Imagen de ${informacion.strDrink}`}

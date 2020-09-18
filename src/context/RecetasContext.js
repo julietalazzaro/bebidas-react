@@ -9,19 +9,36 @@ const RecetasProvider = (props) => {
   //state del context
   const [recetas, setRecetas] = useState([]);
   const [busqueda, buscarRecetas] = useState({
-    nombre: "",
+    tipo: "",
     categoria: "",
+    ingrediente: "",
+    nombrebebida: "",
   });
   const [consultar, setConsultar] = useState(false);
 
   useEffect(() => {
     if (consultar) {
       const obtenerRecetas = async () => {
-        const url = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${busqueda.nombre}&c=${busqueda.categoria}`;
-        const resultado = await axios.get(url);
+        let url = "";
+        switch (busqueda.tipo) {
+          case "categoria":
+            url = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${busqueda.categoria}`;
+            break;
 
+          case "ingrediente":
+            url = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${busqueda.ingrediente}`;
+            break;
+
+          case "nombrebebida":
+            url = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?s=${busqueda.nombrebebida}`;
+            break;
+          default:
+            break;
+        }
+        const resultado = await axios.get(url);
+        //  resultado.data.drinks.push({ strDrink: "", strDrinkThumb: "" });
         setRecetas(resultado.data.drinks);
-        //console.log(resultado.data.drinks);
+        // console.log(resultado.data.drinks);
         setConsultar(false);
       };
       obtenerRecetas();
